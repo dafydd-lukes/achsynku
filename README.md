@@ -111,6 +111,19 @@ window.onresize = function() {
 <iframe id="varianty" src="https://trnka.korpus.cz/~lukes/achsynku/" frameborder="0" width="100%"></iframe>
 </html>
 ```
+
+# Why "AchSynku"?
+
+[Because](http://cs.wikipedia.org/wiki/Ach_synku,_synku):
+
+> Ach [syn](http://wiki.korpus.cz/doku.php/cnk:syn)ku, synku, doma-li jsi?
+>
+> Tatíček se ptá, [oral](http://wiki.korpus.cz/doku.php/cnk:oral2013)-li jsi?
+>
+> Oral jsem oral, ale málo,
+>
+> množství těch tvarů mě rozeštkalo...
+
 </xmp>
 
 <script src="https://trnka.korpus.cz/~lukes/strapdown/v/0.2/strapdown.js"></script>
