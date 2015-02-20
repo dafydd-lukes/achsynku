@@ -91,15 +91,16 @@ if ($query) {
 <?php
 $db = new SQLite3('achsynku.sqlite');
 // $db = sqlite_open('achsynku.sqlite');
+$esc_query = $db->escapeString($query);
 $sql_query = "
 SELECT word
 FROM word2lemma
 WHERE lemma IN
-    (SELECT '$query'
+    (SELECT '$esc_query'
      COLLATE NOCASE
      UNION SELECT lemma
      FROM word2lemma
-     WHERE word = '$query'
+     WHERE word = '$esc_query'
      COLLATE NOCASE);
 ";
 // $variants = sqlite_fetch_all(sqlite_query($db, $query) SQLITE_ASSOC);
