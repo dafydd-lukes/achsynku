@@ -95,11 +95,11 @@ $sql_query = "
 SELECT word
 FROM word2lemma
 WHERE lemma IN
-    (SELECT \"$query\"
+    (SELECT '$query'
      COLLATE NOCASE
      UNION SELECT lemma
      FROM word2lemma
-     WHERE word = \"$query\"
+     WHERE word = '$query'
      COLLATE NOCASE);
 ";
 // $variants = sqlite_fetch_all(sqlite_query($db, $query) SQLITE_ASSOC);
