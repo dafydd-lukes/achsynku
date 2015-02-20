@@ -27,6 +27,33 @@ following criteria:
 
 - lemma(x) == lemma(string)
 
+In SQL terms what happens is the following -- I have a `word2lemma` table which
+lists all the unique (word, lemma) pairs (the `id` column is irrelevant, it's
+just the primary key):
+
+| id | word | lemma |
+|---|---|---|
+| ... | ... | ... |
+| 998 | ale | ale |
+| 999 | Ale | ale |
+| 1000 | ále | ale |
+| ... | ... | ... |
+
+And I run the following query against it (where `$query_string` is the input
+string entered by the user):
+
+```sql
+SELECT word
+FROM word2lemma
+WHERE lemma IN
+    (SELECT '$query_string'
+     COLLATE NOCASE
+     UNION SELECT lemma
+     FROM word2lemma
+     WHERE word = '$query_string'
+     COLLATE NOCASE);
+```
+
 # Maintenance and deployment
 
 ## Updating the database based on a new lemmatization
