@@ -90,7 +90,6 @@ if ($query) {
 
 <?php
 $db = new SQLite3('achsynku.sqlite');
-// $db = sqlite_open('achsynku.sqlite');
 $esc_query = $db->escapeString($query);
 $sql_query = "
 SELECT word
@@ -103,13 +102,11 @@ WHERE lemma IN
      WHERE word = '$esc_query'
      COLLATE NOCASE);
 ";
-// $variants = sqlite_fetch_all(sqlite_query($db, $query) SQLITE_ASSOC);
 $results = $db->query($sql_query);
 
 $variants = array();
 while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
   array_push($variants, $row['word']);
-  // var_dump($row);
 }
 
 if ($variants) {
