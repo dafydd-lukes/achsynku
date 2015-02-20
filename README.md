@@ -41,7 +41,7 @@ command line and `paste` it as the first column).
 
 SQLite cheat sheet:
 
-```
+```sql
 $ sqlite3 achsynku.sqlite
 sqlite> drop table word2lemma;
 sqlite> create table word2lemma(id int primary key, word text, lemma text);
@@ -53,7 +53,7 @@ sqlite> create index lemma_index on word2lemma(lemma);
 
 ## Embedding the variant search box in another webpage as an iframe
 
-```
+```html
 <html>
 <script>
 function resizeIframe(pixels) {
