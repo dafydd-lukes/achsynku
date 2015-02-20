@@ -60,7 +60,7 @@ WHERE lemma IN
 
 0. Make a backup of the old database. ;)
 
-1. Create a `.tsv` file which lists all the unique (id, word, lemma) pairs in
+1. Create a `.tsv` file which lists all the unique (id, word, lemma) 3-tuples in
 the corpus. *id* is just a unique numeric index (create it with `seq` on the
 command line and `paste` it as the first column).
 
