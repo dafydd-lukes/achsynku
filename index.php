@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Varianty v korpusech řady ORAL</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.ucnk.min.css" />
 <style>
 #box {
   max-width: 55em;
