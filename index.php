@@ -85,22 +85,21 @@ vyhledat varianty vyskytující se v korpusech řady ORAL.">
 $query = $_GET['query'];
 if ($query) {
 ?>
-      <br>
+      <br/>
       <div id="result">
 
 <?php
 $db = new SQLite3('achsynku.sqlite');
-$esc_query = $db->escapeString($query);
+// the query string is lowercased by default and needs to be escaped
+$esc_lc_query = $db->escapeString(mb_strtolower($query, 'UTF-8'));
 $sql_query = "
 SELECT word
 FROM word2lemma
-WHERE lemma IN
-    (SELECT '$esc_query'
-     COLLATE NOCASE
-     UNION SELECT lemma
+WHERE lemma_lc IN
+    (SELECT '$esc_lc_query'
+     UNION SELECT lemma_lc
      FROM word2lemma
-     WHERE word = '$esc_query'
-     COLLATE NOCASE);
+     WHERE word_lc = '$esc_lc_query');
 ";
 $results = $db->query($sql_query);
 
