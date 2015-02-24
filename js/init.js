@@ -28,6 +28,25 @@ $(document).ready(function() {
 
     }
 
-    // tell the parent frame how tall we are
+    /**
+     * set up listeners for dynamically generating search links based on the
+     * CQL query textarea when the corpus search buttons are clicked
+     */
+    $(".corpus-search").click(function(e) {
+        e.preventDefault();
+        var corpName = $(this).attr("id");
+        var currQuery = encodeURIComponent($("textarea").val());
+        var url = 'https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2F'
+                    + corpName
+                    + '&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql='
+                    + currQuery
+                    + '&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all';
+        console.log(url);
+        window.open(url);
+    });
+
+    /**
+    /* tell the parent frame how tall we are
+     */
     parent.postMessage(getElemHeightById("box"), "*");
 });

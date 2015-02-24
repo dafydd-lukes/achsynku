@@ -70,10 +70,10 @@ if ($variants) {
   echo '<p><textarea class="form-control">';
   echo $cql_query;
   echo '</textarea></p>';
-  echo '<p>Použít dotaz pro hledání v korpusu:</p>';
-  echo "<p><a target='_blank' class='btn btn-success' href='https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2Foral2006&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql=$cql_query&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all'>ORAL2006</a>";
-  echo "<a target='_blank' class='btn btn-warning' href='https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2Foral2008&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql=$cql_query&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all'>ORAL2008</a>";
-  echo "<a target='_blank' class='btn btn-danger' href='https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2Foral2013&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql=$cql_query&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all'>ORAL2013</a></p>";
+  echo '<p>Dotaz si můžete ručně <b>upravit</b> (např. vynechat tvary, které se vám nehodí) a rovnou <b>použít</b> pro hledání v korpusu:</p>';
+  echo "<p><a href='#' target='_blank' class='btn btn-success corpus-search' id='oral2006'>ORAL2006</a>";
+  echo "<a href='#' target='_blank' class='btn btn-warning corpus-search' id='oral2008'>ORAL2008</a>";
+  echo "<a href='#' target='_blank' class='btn btn-danger corpus-search' id='oral2013'>ORAL2013</a></p>";
   echo '<div class="alert alert-warning"><p><b>Upozornění</b>: nabízené varianty jsou založené na experimentální lemmatizaci mluvených korpusů. Zkontrolujte si, zda odpovídají vašemu záměru, a pokud narazíte na chybu, <a href="https://podpora.korpus.cz/">dejte nám vědět</a>!</p></div>';
 } else {
   echo "<p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž nemá ani žádné varianty.</p>";
