@@ -19,6 +19,7 @@ $(document).ready(function() {
             // this function will be run on each new typing event
             return function() {
                 // update the textarea height
+                textarea.style.height = 0;
                 textarea.style.height = textarea.scrollHeight + "px";
                 // inform the parent frame our height may have changed
                 parent.postMessage(getElemHeightById("box"), "*");
