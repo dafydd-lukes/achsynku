@@ -4,55 +4,8 @@
     <meta charset="utf-8">
     <title>Varianty v korpusech řady ORAL</title>
     <link rel="stylesheet" href="css/bootstrap.ucnk.min.css" />
-<style>
-#box {
-  max-width: 55em;
-  border-radius: 9px;
-  background-color: #d2edc0;
-  box-shadow: 0 0 4px #a0a0a0;
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-#box > :first-child {
-  margin-top: 0px;
-}
-
-#result > :last-child {
-  margin-bottom: 0px;
-}
-
-a.btn {
-  margin-right: 1em;
-}
-
-pre {
-  white-space: pre-wrap;
-}
-</style>
-<script>
-// when a message is received from the parent window that it has been resized, 
-// send a message to it requesting that the iframe be resized too
-
-function getElemHeightById(id) {
-  return document.getElementById(id).scrollHeight;
-}
-
-// cross-browser compatible infrastructure
-var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-var eventer = window[eventMethod];
-var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-
-// listen to message from parent window
-eventer(messageEvent, function(e) {
-  if (e.origin == "https://wiki.korpus.cz") {
-    parent.postMessage(getElemHeightById("box"), "*");
-  } else {
-    console.log("Was expecting a message from https://wiki.korpus.cz, got "
-      + e.origin + " instead.");
-  }
-});
-</script>
+    <link rel="stylesheet" href="css/achsynku.css" />
+    <script type="text/javascript" src="js/messaging.js"></script>
   </head>
 
 <?php

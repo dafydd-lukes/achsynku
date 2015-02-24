@@ -1,0 +1,24 @@
+#box {
+  max-width: 55em;
+  border-radius: 9px;
+  background-color: #d2edc0;
+  box-shadow: 0 0 4px #a0a0a0;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+#box > :first-child {
+  margin-top: 0px;
+}
+
+#result > :last-child {
+  margin-bottom: 0px;
+}
+
+a.btn {
+  margin-right: 1em;
+}
+
+pre {
+  white-space: pre-wrap;
+}
