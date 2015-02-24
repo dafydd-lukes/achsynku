@@ -1,5 +1,10 @@
-function init() {
-    // set up automatic resizing of textareas according to content
+$(document).ready(function() {
+    /**
+    /* set up automatic resizing of all textareas according to content
+     *
+     * NOTE: this snippet does not require jQuery, it can be simply used within
+     * a body onload function.
+     */
     var textareas = document.getElementsByTagName("textarea");
 
     for (var i = 0; i < textareas.length; i++) {
@@ -24,4 +29,4 @@ function init() {
 
     // tell the parent frame how tall we are
     parent.postMessage(getElemHeightById("box"), "*");
-}
+});

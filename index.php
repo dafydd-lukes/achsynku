@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs">
   <head>
     <meta charset="utf-8">
     <title>Varianty v korpusech řady ORAL</title>
     <link rel="stylesheet" href="css/bootstrap.ucnk.min.css" />
     <link rel="stylesheet" href="css/achsynku.css" />
     <script type="text/javascript" src="js/messaging.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="js/init.js"></script>
   </head>
 
@@ -14,7 +15,7 @@
 // ini_set('display_errors', 'On');
 ?>
 
-  <body onload="init();">
+  <body>
     <div id="box">
       <h3>Vyhledávač variant v korpusech řady ORAL</h3>
       <p>
