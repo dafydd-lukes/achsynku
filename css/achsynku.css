@@ -19,6 +19,7 @@ a.btn {
   margin-right: 1em;
 }
 
-pre {
-  white-space: pre-wrap;
+textarea {
+    font-family: monospace;
+    overflow: hidden;
 }

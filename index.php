@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/bootstrap.ucnk.min.css" />
     <link rel="stylesheet" href="css/achsynku.css" />
     <script type="text/javascript" src="js/messaging.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
   </head>
 
 <?php
@@ -13,7 +14,7 @@
 // ini_set('display_errors', 'On');
 ?>
 
-  <body onload="parent.postMessage(getElemHeightById('box'), '*');">
+  <body onload="init();">
     <div id="box">
       <h3>Vyhledávač variant v korpusech řady ORAL</h3>
       <p>
@@ -65,9 +66,9 @@ if ($variants) {
   $cql_query = '[word="'.join('|', $variants).'"]';
 
   echo "<p>CQL dotaz, který v korpusu vyhledá možné varianty tvaru/lemmatu <b>$query</b>:</p>";
-  echo '<p><pre>';
+  echo '<p><textarea class="form-control">';
   echo $cql_query;
-  echo '</pre></p>';
+  echo '</textarea></p>';
   echo '<p>Použít dotaz pro hledání v korpusu:</p>';
   echo "<p><a target='_blank' class='btn btn-success' href='https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2Foral2006&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql=$cql_query&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all'>ORAL2006</a>";
   echo "<a target='_blank' class='btn btn-warning' href='https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2Foral2008&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql=$cql_query&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all'>ORAL2008</a>";
