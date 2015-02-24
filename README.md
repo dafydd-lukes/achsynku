@@ -19,63 +19,75 @@ corpora.
 
 I have a database which stores all the unique (word, lemma) pairs occurring in
 the experimentally lemmatized `oral_v4` corpus. I take the **string** you
-specify as **input** and **match** it both against the **lemmas** and **word
-forms**. I **return** all the **word forms** x that satisfy either of the
-following criteria:
+specify as **input**, **lowercase** it and **match** it against the lowercased
+versions of the **lemmas** and **word forms** I know about. I **return** all the
+**word forms** x that satisfy either of the following criteria:
 
-- lemma(x) == string
+- lc(lemma(x)) == lc(string)
 
-- lemma(x) == lemma(string)
+- lc(lemma(x)) == lc(lemma(string))
 
 In SQL terms what happens is the following -- I have a `word2lemma` table which
-lists all the unique (word, lemma) pairs (the `id` column is irrelevant, it's
-just the primary key):
+lists all the unique (word, lemma) pairs and their lowercase variants (the `id`
+column is irrelevant, it's just the primary key):
 
-| id | word | lemma |
-|---|---|---|
-| ... | ... | ... |
-| 998 | ale | ale |
-| 999 | Ale | ale |
-| 1000 | ále | ale |
-| ... | ... | ... |
+| id | word | word_lc | lemma | lemma_lc |
+|---|---|---|---|---|
+| ... | ... | ... | ... | ... |
+| 998 | ale | ale | ale | ale |
+| 999 | Ale | ale | ale | ale |
+| 1000 | ále | ále |ale | ale |
+| ... | ... | ... | ... | ... |
 
-And I run the following query against it (where `$query_string` is the input
-string entered by the user):
+And I run the following query against it (where `$query_string` is the
+lowercased version of the input string entered by the user):
 
 ```sql
 SELECT word
 FROM word2lemma
-WHERE lemma IN
+WHERE lemma_lc IN
     (SELECT '$query_string'
-     COLLATE NOCASE
-     UNION SELECT lemma
+     UNION SELECT lemma_lc
      FROM word2lemma
-     WHERE word = '$query_string'
-     COLLATE NOCASE);
+     WHERE word_lc = '$query_string');
 ```
+
+**NB**: The table column with the case-sensitive variant of the lemma is not
+currently being used for anything but is kept around in case it is needed in the
+future for implementing more refined search options.
 
 # Maintenance and deployment
 
 ## Updating the database based on a new lemmatization
 
-0. Make a backup of the old database. ;)
+1. Create a `.tsv` file which lists all the unique (word, lemma) pairs in
+the corpus.
 
-1. Create a `.tsv` file which lists all the unique (id, word, lemma) 3-tuples in
-the corpus. *id* is just a unique numeric index (create it with `seq` on the
-command line and `paste` it as the first column).
+2. Prepend an `id` column, which is just a unique numeric index (create it with
+`seq` on the command line and `paste` it as the first column).
 
-2. Import the `.tsv` file into the database and index it on both columns.
+3. Add `word_lc` and `lemma_lc` columns after the `word` and `lemma` columns
+respectively, storing the lowercase variants of the entries in the corresponding
+rows. (Use e.g. `perl` and `lc` to generate them; don't forget `-CSD` to get
+proper UTF-8 handling!)
+
+4. Import the `.tsv` file into the database and index it on the lowercase
+columns (which are the only ones being matched against currently).
 
 SQLite cheat sheet:
 
 ```sql
 $ sqlite3 achsynku.sqlite
 sqlite> drop table word2lemma;
-sqlite> create table word2lemma(id int primary key, word text, lemma text);
+sqlite> create table word2lemma(id int primary key,
+   ...>                         word text,
+   ...>                         word_lc text,
+   ...>                         lemma text,
+   ...>                         lemma_lc text);
 sqlite> .separator "\t"
-sqlite> .import id_word_lemma.tsv word2lemma
-sqlite> create index word_index on word2lemma(word);
-sqlite> create index lemma_index on word2lemma(lemma);
+sqlite> .import achsynku.tsv word2lemma
+sqlite> create index word_lc_index on word2lemma(word_lc);
+sqlite> create index lemma_lc_index on word2lemma(lemma_lc);
 ```
 
 ## Embedding the variant search box in another webpage as an iframe
