@@ -22,4 +22,5 @@ a.btn {
 textarea {
     font-family: monospace;
     overflow: hidden;
+    resize: none;
 }
