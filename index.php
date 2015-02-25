@@ -40,44 +40,70 @@ vyhledat varianty vyskytující se v korpusech řady ORAL.">
 $query = $_GET['query'];
 if ($query) {
 ?>
+
       <br/>
       <div id="result">
 
 <?php
-$db = new SQLite3('achsynku.sqlite');
-// the query string is lowercased by default and needs to be escaped
-$esc_lc_query = $db->escapeString(mb_strtolower($query, 'UTF-8'));
-$sql_query = "
-SELECT word
-FROM word2lemma
-WHERE lemma_lc IN
-    (SELECT '$esc_lc_query'
-     UNION SELECT lemma_lc
-     FROM word2lemma
-     WHERE word_lc = '$esc_lc_query');
-";
-$results = $db->query($sql_query);
+  $db = new SQLite3('achsynku.sqlite');
+  // the query string is lowercased by default and needs to be escaped
+  $esc_lc_query = $db->escapeString(mb_strtolower($query, 'UTF-8'));
+  $sql_query = "
+  SELECT word
+  FROM word2lemma
+  WHERE lemma_lc IN
+      (SELECT '$esc_lc_query'
+       UNION SELECT lemma_lc
+       FROM word2lemma
+       WHERE word_lc = '$esc_lc_query');
+  ";
+  $results = $db->query($sql_query);
 
-$variants = array();
-while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
-  array_push($variants, $row['word']);
-}
+  $variants = array();
+  while ($row = $results->fetchArray(SQLITE3_ASSOC)) {
+    array_push($variants, $row['word']);
+  }
 
-if ($variants) {
-  $cql_query = '[word="'.join('|', $variants).'"]';
+  if ($variants) {
+    $cql_query = '[word="'.join('|', $variants).'"]';
 
-  echo "<p>CQL dotaz, který v korpusu vyhledá možné varianty tvaru/lemmatu <b>$query</b>:</p>";
-  echo '<p><textarea class="form-control">';
-  echo $cql_query;
-  echo '</textarea></p>';
-  echo '<p>Dotaz si můžete ručně <b>upravit</b> (např. vynechat varianty, které se vám nehodí či jsou podle vás špatně) a rovnou <b>použít</b> pro hledání v korpusu:</p>';
-  echo "<p><a href='#' target='_blank' class='btn btn-success corpus-search' id='oral2006'>ORAL2006</a>";
-  echo "<a href='#' target='_blank' class='btn btn-warning corpus-search' id='oral2008'>ORAL2008</a>";
-  echo "<a href='#' target='_blank' class='btn btn-danger corpus-search' id='oral2013'>ORAL2013</a></p>";
-  echo '<div class="alert alert-warning"><p><b>Upozornění</b>: nabízené varianty jsou založené na experimentální lemmatizaci mluvených korpusů. Zkontrolujte si, zda odpovídají vašemu záměru, a pokud narazíte na chybu, <a href="https://podpora.korpus.cz/">dejte nám vědět</a>!</p></div>';
-} else {
-  echo "<p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž nemá ani žádné varianty.</p>";
-}
+    echo "<p>CQL dotaz, který v korpusu vyhledá možné varianty tvaru/lemmatu <b>$query</b>:</p>";
+?>
+
+        <p>
+          <textarea class="form-control"><?php echo $cql_query; ?></textarea>
+        </p>
+
+        <p>Dotaz si můžete ručně <b>upravit</b> (např. vynechat varianty, které 
+se vám nehodí či jsou podle vás špatně) a rovnou <b>použít</b> pro hledání v 
+korpusu:</p>
+
+        <p>
+          <a href="#" target="_blank" class="btn btn-success corpus-search"
+id="oral2006">ORAL2006</a>
+          <a href="#" target="_blank" class="btn btn-warning corpus-search"
+id="oral2008">ORAL2008</a>
+          <a href="#" target="_blank" class="btn btn-danger corpus-search"
+id="oral2013">ORAL2013</a>
+        </p>
+
+        <div class="alert alert-warning">
+          <p>
+            <b>Upozornění</b>: nabízené varianty jsou založené na experimentální 
+lemmatizaci mluvených korpusů. Zkontrolujte si, zda odpovídají vašemu záměru, a 
+pokud narazíte na chybu, <a href="https://podpora.korpus.cz/">dejte nám 
+vědět</a>!
+          </p>
+        </div>
+
+<?php
+    } else {
+?>
+
+<p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž nemá ani žádné varianty.</p>
+
+<?php
+  }
 ?>
 
       </div>
