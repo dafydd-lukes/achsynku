@@ -43,7 +43,7 @@ And I run the following query against it (where `$query_string` is the
 lowercased version of the input string entered by the user):
 
 ```sql
-SELECT word
+SELECT DISTINCT word
 FROM word2lemma
 WHERE lemma_lc IN
     (SELECT '$query_string'

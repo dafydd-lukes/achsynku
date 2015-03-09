@@ -49,7 +49,7 @@ if ($query) {
   // the query string is lowercased by default and needs to be escaped
   $esc_lc_query = $db->escapeString(mb_strtolower($query, 'UTF-8'));
   $sql_query = "
-  SELECT word
+  SELECT DISTINCT word
   FROM word2lemma
   WHERE lemma_lc IN
       (SELECT '$esc_lc_query'
