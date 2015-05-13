@@ -74,9 +74,10 @@ if ($query) {
           <textarea class="form-control"><?php echo $cql_query; ?></textarea>
         </p>
 
-        <p>Dotaz si můžete ručně <b>upravit</b> (např. vynechat varianty, které 
-se vám nehodí či jsou podle vás špatně) a rovnou <b>použít</b> pro hledání v 
-korpusu:</p>
+        <p>Dotaz si můžete ručně <b>upravit</b> (např. umazat varianty, které se vám
+nehodí či jsou podle vás špatně) a rovnou <b>použít</b> pro hledání v korpusu (stačí
+<b>kliknout</b> na tlačítko se jménem požadovaného korpusu; automaticky se použije
+<b>aktuální podoba dotazu v okýnku výše</b>):</p>
 
         <p>
           <a href="#" target="_blank" class="btn btn-success corpus-search"
