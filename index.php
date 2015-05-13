@@ -19,18 +19,18 @@
     <div id="box">
       <h3>Vyhledávač variant v korpusech řady ORAL</h3>
       <p>
-Pokud si nejste jisti, v jakých variantách by se vámi hledaný tvar mohl v 
-mluvených korpusech vyskytovat, můžete si pravděpodobné kandidáty najít pomocí 
-tohoto formuláře. Výsledek se zobrazí rovnou v podobě CQL dotazu, který lze 
-zadat do korpusového manažeru KonText. Zkuste si např. vyhledat, v jakých 
-zápisových variantách se v korpusech řady ORAL vyskytuje slovo 
+Pokud si nejste jisti, v jakých variantách by se vámi hledaný tvar mohl v
+mluvených korpusech vyskytovat, můžete si pravděpodobné kandidáty najít pomocí
+tohoto formuláře. Výsledek se zobrazí rovnou v podobě CQL dotazu, který lze
+zadat do korpusového manažeru KonText. Zkuste si např. vyhledat, v jakých
+zápisových variantách se v korpusech řady ORAL vyskytuje slovo
 <em>protože</em>.
       </p>
       <form>
         <div class="form-group">
           <label for="query">Tvar, (spisovné) lemma</label>
           <input type="text" class="form-control" id="query" name="query"
-                 placeholder="Zadejte tvar či spisovné lemma, k němuž chcete 
+                 placeholder="Zadejte tvar či spisovné lemma, k němuž chcete
 vyhledat varianty vyskytující se v korpusech řady ORAL.">
         </div>
         <input class="btn btn-primary" type="submit" value="Vyhledat varianty">
@@ -81,18 +81,18 @@ nehodí či jsou podle vás špatně) a rovnou <b>použít</b> pro hledání v k
 
         <p>
           <a href="#" target="_blank" class="btn btn-success corpus-search"
-id="oral2006">ORAL2006</a>
+id="oral2006">Prohledat ORAL2006</a>
           <a href="#" target="_blank" class="btn btn-warning corpus-search"
-id="oral2008">ORAL2008</a>
+id="oral2008">Prohledat ORAL2008</a>
           <a href="#" target="_blank" class="btn btn-danger corpus-search"
-id="oral2013">ORAL2013</a>
+id="oral2013">Prohledat ORAL2013</a>
         </p>
 
         <div class="alert alert-warning">
           <p>
-            <b>Upozornění</b>: nabízené varianty jsou založené na experimentální 
-lemmatizaci mluvených korpusů. Zkontrolujte si, zda odpovídají vašemu záměru, a 
-pokud narazíte na chybu, <a href="https://podpora.korpus.cz/">dejte nám 
+            <b>Upozornění</b>: nabízené varianty jsou založené na experimentální
+lemmatizaci mluvených korpusů. Zkontrolujte si, zda odpovídají vašemu záměru, a
+pokud narazíte na chybu, <a href="https://podpora.korpus.cz/">dejte nám
 vědět</a>!
           </p>
         </div>
@@ -101,7 +101,7 @@ vědět</a>!
     } else {
 ?>
 
-        <p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž 
+        <p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž
 nemá ani žádné varianty.</p>
 
 <?php
