@@ -55,35 +55,18 @@ future for implementing more refined search options.
 
 ## Updating the database based on a new lemmatization
 
+Steps 1 and 2 are only necessary if you use a custom (word, lemma) mapping file
+instead of the provided one (`achsynku.tsv`). Step 3 can be automated by
+running the `init_db.sh` script from the root directory of the app.
+
 1. Create a `.tsv` file which lists all the unique (word, lemma) pairs in
 the corpus.
 
 2. Prepend an `id` column, which is just a unique numeric index (create it with
 `seq` on the command line and `paste` it as the first column).
 
-3. Add `word_lc` and `lemma_lc` columns after the `word` and `lemma` columns
-respectively, storing the lowercase variants of the entries in the corresponding
-rows. (Use e.g. `perl` and `lc` to generate them; don't forget `-CSD` to get
-proper UTF-8 handling!)
-
-4. Import the `.tsv` file into the database and index it on the lowercase
-columns (which are the only ones being matched against currently).
-
-SQLite cheat sheet:
-
-```sql
-$ sqlite3 achsynku.sqlite
-sqlite> drop table word2lemma;
-sqlite> create table word2lemma(id int primary key,
-   ...>                         word text,
-   ...>                         word_lc text,
-   ...>                         lemma text,
-   ...>                         lemma_lc text);
-sqlite> .separator "\t"
-sqlite> .import achsynku.tsv word2lemma
-sqlite> create index word_lc_index on word2lemma(word_lc);
-sqlite> create index lemma_lc_index on word2lemma(lemma_lc);
-```
+3. Import the `.tsv` file into the database, taking care to specify `COLLATE
+NOCASE` for the text columns, and create indices for faster searching.
 
 ## Embedding the variant search box in another webpage as an iframe
 
