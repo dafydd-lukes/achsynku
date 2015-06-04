@@ -16,11 +16,11 @@ I have a database which stores all the unique (word, lemma) pairs occurring in
 the experimentally lemmatized `oral_v4` corpus. I take the **string** you
 specify as **input**, **lowercase** it and **match** it against the lowercased
 versions of the **lemmas** and **word forms** I know about. I **return** all the
-**word forms** x that satisfy either of the following criteria:
+unique **word forms** x that satisfy either of the following criteria:
 
-- lc(lemma(x)) == lc(string)
+- lc(string) ∈ lc(lemma(x))<sup><a name="fn1-ref" href="#fn1">1</a></sup>
 
-- lc(lemma(x)) == lc(lemma(string))
+- | lc(lemma(string)) ∩ lc(lemma(x)) | > 0
 
 In SQL terms what happens is the following -- I have a `word2lemma` table which
 lists all the unique (word, lemma) pairs and their lowercase variants (the `id`
@@ -31,7 +31,7 @@ column is irrelevant, it's just the primary key):
 | ... | ... | ... | ... | ... |
 | 998 | ale | ale | ale | ale |
 | 999 | Ale | ale | ale | ale |
-| 1000 | ále | ále |ale | ale |
+| 1000 | ále | ále | ale | ale |
 | ... | ... | ... | ... | ... |
 
 And I run the following query against it (where `$query_string` is the
@@ -137,3 +137,18 @@ Copyright © 2015 David Lukeš
 
 Distributed under the
 [GNU General Public License v3](http://www.gnu.org/licenses/gpl-3.0.en.html).
+
+---
+
+<a name="fn1" href="#fn1-ref">1</a>: If the results returned by the lemma()
+relation are all strings that are also valid word forms, this criterion is
+superfluous. In general however, lemmas can take a form which doesn't exactly
+correspond to any of their corresponding word forms (e.g. when distinguishing
+multiple word senses, as in *tear^1* and *tear^2*). This is not the case here,
+yet we still implement this criterion for another, purely practical reason: our
+`word2lemma` table only contains entries for word forms which have actually
+occurred in the corpus. In other words, if the only occurrence of the lemma
+*zženštilý* is as the word form *zženštilej*, lemma(*zženštilý*) will return an
+empty set, but we still want to return *zženštilej* as a result to the query
+*zženštilý*, hence the need to check lemma(*zženštilej*) == {*zženštilý*}
+directly against the query *zženštilý*.
