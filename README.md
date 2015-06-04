@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html>
-<title>AchSynku README</title>
-
-<xmp theme="simplex">
 # Try me out
 
 ## Where?
@@ -135,8 +130,3 @@ window.onresize = function() {
 > Oral jsem oral, ale málo,
 >
 > množství těch tvarů mě rozeštkalo...
-
-</xmp>
-
-<script src="https://trnka.korpus.cz/~lukes/strapdown/v/0.2/strapdown.js"></script>
-</html>
