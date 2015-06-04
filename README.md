@@ -3,7 +3,7 @@
 ## Where?
 
 [Here](https://wiki.korpus.cz/doku.php/kurz:hledani_v_mluvenych_korpusech#jak_spravne_zadat_hledane_slovo)
-or [here](index.php).
+or [here](https://trnka.korpus.cz/~lukes/achsynku/index.php).
 
 ## What am I good for?
 
