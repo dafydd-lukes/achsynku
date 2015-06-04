@@ -5,3 +5,4 @@ recent changes haven't affected what results are returned by AchSynku.
 
 - "abÚzus" → "abuse"
 - "Tata" →  "tata|Tata|tatou|tatové|tatovi|tatu|taty"
+- "zŽeNštilÝ" → "zženštilej"
