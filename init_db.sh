@@ -13,6 +13,14 @@ fi
 
 if [[ -z $1 ]]; then
     tsv=achsynku.tsv
+
+    if [[ ! -f $tsv ]]; then
+        echo "Fetching $tsv..."
+        curl -O https://trnka.korpus.cz/~lukes/files/achsynku.tsv || {
+            echo "Unable to fetch $tsv!"
+            exit 1
+        }
+    fi
 else
     tsv="$1"
 fi
