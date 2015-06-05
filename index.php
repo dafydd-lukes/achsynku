@@ -46,17 +46,18 @@ if ($query) {
 
 <?php
   $db = new SQLite3('achsynku.sqlite');
-  // the query string is lowercased by default and needs to be escaped
-  $esc_lc_query = $db->escapeString(mb_strtolower($query, 'UTF-8'));
-  $sql_query = "
+  // the query string is NFD normalized by default (for case insensitive
+  // collation in sqlite3 to work) and needs to be escaped
+  $esc_query = $db->escapeString($query);
+  $sql_query = Normalizer::normalize("
   SELECT DISTINCT word
   FROM word2lemma
-  WHERE lemma_lc IN
-      (SELECT '$esc_lc_query'
-       UNION SELECT lemma_lc
+  WHERE lemma IN
+      (SELECT '$esc_query'
+       UNION SELECT lemma
        FROM word2lemma
-       WHERE word_lc = '$esc_lc_query');
-  ";
+       WHERE word = '$esc_query');
+  ", Normalizer::FORM_D);
   $results = $db->query($sql_query);
 
   $variants = array();
