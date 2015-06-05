@@ -28,7 +28,7 @@ fi
 echo "NFD-normalizing input .tsv: $tsv..."
 perl -i -CSAD -MUnicode::Normalize -nle 'print NFD $_' "$tsv"
 
-echo "Removing old achsynku.sqlite databse..."
+echo "Removing old achsynku.sqlite database..."
 rm -f achsynku.sqlite
 
 echo "Creating new achsynku.sqlite database based on $tsv..."
