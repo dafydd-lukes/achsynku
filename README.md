@@ -23,16 +23,16 @@ unique **word forms** x that satisfy either of the following criteria:
 - | lc(lemma(string)) ∩ lc(lemma(x)) | > 0
 
 In SQL terms what happens is the following -- I have a `word2lemma` table which
-lists all the unique (word, lemma) pairs and their lowercase variants (the `id`
-column is irrelevant, it's just the primary key):
+lists all the unique (word, lemma) pairs and collates them irrespective of case
+when accessed (the `id` column is irrelevant, it's just the primary key):
 
-| id | word | word_lc | lemma | lemma_lc |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-| 998 | ale | ale | ale | ale |
-| 999 | Ale | ale | ale | ale |
-| 1000 | ále | ále | ale | ale |
-| ... | ... | ... | ... | ... |
+| id | word | lemma |
+|---|---|---|
+| ... | ... | ... |
+| 998 | ale | ale |
+| 999 | Ale | ale |
+| 1000 | ále | ale |
+| ... | ... | ... |
 
 And I run the following query against it (where `$query_string` is the
 lowercased version of the input string entered by the user):
@@ -40,16 +40,21 @@ lowercased version of the input string entered by the user):
 ```sql
 SELECT DISTINCT word
 FROM word2lemma
-WHERE lemma_lc IN
+WHERE lemma IN
     (SELECT '$query_string'
-     UNION SELECT lemma_lc
+     UNION SELECT lemma
      FROM word2lemma
-     WHERE word_lc = '$query_string');
+     WHERE word = '$query_string');
 ```
 
-**NB**: The table column with the case-sensitive variant of the lemma is not
-currently being used for anything but is kept around in case it is needed in the
-future for implementing more refined search options.
+**NB**: SQLite itself **cannot** perform case insensitive collation for the
+**full Unicode range**, only for ASCII characters. This is circumvented by
+storing the strings as NFD-normalized and performing NFD normalization of the
+query string as well. NFD normalization decouples letters and their accents,
+which results (in the case of Czech) in ASCII letters only, which SQLite can
+deal with successfully in a case insensitive fashion (the intervening combining
+diacritic marks are the same irrespective of case). **Thanks to an anonymous
+reviewer of my SLOVKO2015 paper for suggesting this approach!**
 
 # Maintenance and deployment
 
