@@ -100,12 +100,7 @@ vědět</a>!
 
 <?php
     } else {
-?>
-
-        <p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž
-nemá ani žádné varianty.</p>
-
-<?php
+      echo "<p>Tvar/lemma <b>$query</b> se v korpusech řady ORAL nevyskytuje a tudíž nemá ani žádné varianty.</p>";
   }
 ?>
 
