@@ -23,7 +23,7 @@ $(document).ready(function() {
                 textarea.style.height = textarea.scrollHeight + "px";
                 // inform the parent frame our height may have changed
                 parent.postMessage(getElemHeightById("box"), "*");
-            }
+            };
         })());
 
     }
