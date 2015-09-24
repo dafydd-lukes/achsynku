@@ -66,7 +66,8 @@ if ($query) {
   }
 
   if ($variants) {
-    $cql_query = '[word="'.join('|', $variants).'"]';
+    $cql_query = Normalizer::normalize('[word="'.join('|', $variants).'"]',
+                                       Normalizer::FORM_C);
 
     echo "<p>CQL dotaz, který v korpusu vyhledá možné varianty tvaru/lemmatu <b>$query</b>:</p>";
 ?>
