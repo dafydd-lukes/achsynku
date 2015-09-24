@@ -37,10 +37,10 @@ $(document).ready(function() {
         var corpName = $(this).attr("id");
         var currQuery = encodeURIComponent($("textarea").val());
         var url = 'https://kontext.korpus.cz/first?shuffle=1&reload=&corpname=omezeni%2F'
-                    + corpName
-                    + '&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql='
-                    + currQuery
-                    + '&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all';
+              + corpName
+              + '&queryselector=cqlrow&iquery=&phrase=&word=&char=&cql='
+              + currQuery
+              + '&default_attr=word&fc_lemword_window_type=both&fc_lemword_wsize=5&fc_lemword=&fc_lemword_type=all';
         console.log(url);
         window.open(url);
     });
