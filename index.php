@@ -30,8 +30,7 @@ zápisových variantách se v korpusech řady ORAL vyskytuje slovo
         <div class="form-group">
           <label for="query">Tvar, (spisovné) lemma</label>
           <input type="text" class="form-control" id="query" name="query"
-                 placeholder="Zadejte tvar či spisovné lemma, k němuž chcete
-vyhledat varianty vyskytující se v korpusech řady ORAL.">
+                 placeholder="Zadejte tvar či spisovné lemma, k němuž chcete vyhledat varianty vyskytující se v korpusech řady ORAL.">
         </div>
         <input class="btn btn-primary" type="submit" value="Vyhledat varianty">
       </form>
