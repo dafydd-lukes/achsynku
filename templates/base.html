@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="cs">
+  <head>
+    <meta charset="utf-8">
+    <title>Varianty v korpusech řady ORAL</title>
+    <link rel="stylesheet" href="css/bootstrap.ucnk.min.css" />
+    <link rel="stylesheet" href="css/achsynku.css" />
+    <script type="text/javascript" src="js/messaging.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/init.js"></script>
+  </head>
+
+  <body>
+    <div id="box">
+      <h3>Vyhledávač variant v korpusech řady ORAL</h3>
+
+      <p>
+Pokud si nejste jisti, v jakých variantách by se vámi hledaný tvar mohl v
+mluvených korpusech vyskytovat, můžete si pravděpodobné kandidáty najít pomocí
+tohoto formuláře. Výsledek se zobrazí rovnou v podobě CQL dotazu, který lze
+zadat do korpusového manažeru KonText. Zkuste si např. vyhledat, v jakých
+zápisových variantách se v korpusech řady ORAL vyskytuje slovo
+<em>protože</em>.
+      </p>
+
+      <form>
+        <div class="form-group">
+          <label for="query">Tvar, (spisovné) lemma</label>
+          <input type="text" class="form-control" id="query" name="query"
+                 placeholder="Zadejte tvar či spisovné lemma, k němuž chcete vyhledat varianty vyskytující se v korpusech řady ORAL.">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Vyhledat varianty">
+      </form>
+
+      {result}
+    </div>
+  </body>
+</html>
+
